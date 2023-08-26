@@ -1,26 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const marker1 = document.querySelector('#marker1');
-    const marker2 = document.querySelector('#marker2');
-    let lastMarker1Position = new THREE.Vector3();
-    let lastMarker2Position = new THREE.Vector3();
+AFRAME.registerComponent('markerhandler', {
+    
+    init: function () {
+        
+        this.toggle = false;
+        this.vid = document.querySelector("#marker1")
+        this.vide = document.querySelector("#marker2")
+       
+        alert("Marcadores se afastaram!");
+        
+    },
+    tick: function () {
+        const mixedCube = document.querySelector('#mixedCube');
+        const marker1 = document.querySelector('#marker1').object3D;
+        const marker2 = document.querySelector('#marker2').object3D;
+        
 
-    function checkMarkerMovement() {
-        const marker1Position = marker1.object3D.position;
-        const marker2Position = marker2.object3D.position;
+        if (this.el.object3D.visible === true) {
+            const distance = marker1.position.distanceTo(marker2.position);
 
-        if (marker1Position.distanceTo(lastMarker1Position) > 0.001 ||
-            marker2Position.distanceTo(lastMarker2Position) > 0.001) {
-            alert("Os marcadores estão se movendo!");
+            if (!this.toggle && distance < 0.5) { // Ajuste a distância conforme necessário
+                this.toggle = true;
+                mixedCube.setAttribute('visible', 'true');
+                alert("Marcadores se aproximaram!");
+                
+            }
         }
-
-        lastMarker1Position.copy(marker1Position);
-        lastMarker2Position.copy(marker2Position);
-
-        requestAnimationFrame(checkMarkerMovement); // Verificar a cada quadro renderizado
     }
-
-    checkMarkerMovement();
 });
+
 
 
 
