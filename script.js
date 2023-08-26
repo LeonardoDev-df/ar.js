@@ -18,7 +18,7 @@ AFRAME.registerComponent('markerhandler', {
         if (this.el.object3D.visible === true) {
             const distance = marker1.position.distanceTo(marker2.position);
 
-            if (!this.toggle && distance < 0.5) { // Ajuste a distância conforme necessário
+            if (!this.toggle && distance < 0.3) { // Ajuste a distância conforme necessário
                 this.toggle = true;
                 mixedCube.setAttribute('visible', 'true');
                 alert("Marcadores se aproximaram!");
