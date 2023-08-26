@@ -35,7 +35,7 @@ var ArMarkerControls1 = new THREEx.ArMarkerControls(ArToolkitContext, camera, {
 
 var ArMarkerControls2 = new THREEx.ArMarkerControls(ArToolkitContext, camera, {
     type: 'pattern',
-    patternUrl: 'pattern-bola-azul.patt',
+    patternUrl: 'foto5.patt',
     changeMatrixMode: 'cameraTransformMatrix'
 });
 
