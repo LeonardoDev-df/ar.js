@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, maximun-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
-<title>Home</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r120/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ar.js/2.2.2/aframe-ar.min.js"></script>
-<body style="margin: 0; overflow: hidden;">
-    
+<body>
+    <button id="redirectButton">Clique para Redirecionar</button>
 
-<script src="/script.js"></script>
+    <script>
+        document.getElementById('redirectButton').addEventListener('click', function() {
+            window.location.href = 'SimulationColor.html';
+        });
+    </script>
 </body>
 </html>

@@ -1,61 +1,43 @@
-const scene = new THREE.Scene();
-const camera = new THREE.Camera();
-scene.add(camera);
+document.addEventListener('DOMContentLoaded', function() {
+    const marker1 = document.querySelector('#marker1');
+    const marker2 = document.querySelector('#marker2');
+    let lastMarker1Position = new THREE.Vector3();
+    let lastMarker2Position = new THREE.Vector3();
 
-const renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    alpha: true
-});
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+    function checkMarkerMovement() {
+        const marker1Position = marker1.object3D.position;
+        const marker2Position = marker2.object3D.position;
 
-var ArToolkitSource = new THREEx.ArToolkitSource({
-    sourceType: "webcam",
-});
-ArToolkitSource.init(function(){
-    setTimeout(function(){
-        ArToolkitSource.onResizeElement();
-        ArToolkitSource.copyElementSizeTo(renderer.domElement);
-    }, 2000);
-});
+        if (marker1Position.distanceTo(lastMarker1Position) > 0.001 ||
+            marker2Position.distanceTo(lastMarker2Position) > 0.001) {
+            alert("Os marcadores estão se movendo!");
+        }
 
-var ArToolkitContext = new THREEx.ArToolkitContext({
-    cameraParametersUrl: 'camera_para.dat',
-    detectionMode: 'color_and_matrix'
-});
-ArToolkitContext.init(function(){
-    camera.projectionMatrix.copy(ArToolkitContext.getProjectionMatrix());
+        lastMarker1Position.copy(marker1Position);
+        lastMarker2Position.copy(marker2Position);
+
+        requestAnimationFrame(checkMarkerMovement); // Verificar a cada quadro renderizado
+    }
+
+    checkMarkerMovement();
 });
 
-var ArMarkerControls1 = new THREEx.ArMarkerControls(ArToolkitContext, camera, {
-    type: 'pattern',
-    patternUrl: 'foto.patt',
-    changeMatrixMode: 'cameraTransformMatrix'
-});
 
-var ArMarkerControls2 = new THREEx.ArMarkerControls(ArToolkitContext, camera, {
-    type: 'pattern',
-    patternUrl: 'foto5.patt',
-    changeMatrixMode: 'cameraTransformMatrix'
-});
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({
-    transparent: true,
-    opacity: 0.5,
-    side: THREE.DoubleSide,
-    color: 0x00ff00
-});
-const cube = new THREE.Mesh(geometry, material);
-cube.position.y = geometry.parameters.height / 2;
 
-scene.add(cube);
 
-function animate() {
-    requestAnimationFrame(animate);
-    ArToolkitContext.update(ArToolkitSource.domElement);
-    scene.visible = camera.visible;
-    renderer.render(scene, camera);
-}
 
-animate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
