@@ -4,7 +4,7 @@ AFRAME.registerComponent('markerhandler', {
         this.marker1 = document.querySelector('#marker1');
         this.marker2 = document.querySelector('#marker2');
 
-        alert("Marcadores se afastaram!");
+        alert("Aproxime os marcadores da câmera");
     },
     tick: function () {
         const marker1Visible = this.marker1.object3D.visible;
